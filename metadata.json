@@ -1,5 +1,6 @@
 {
-  "name": "Meet Bhorania website",
-  "description": "",
-  "requestFramePermissions": []
+  "name": "Meet Bhorania Portfolio",
+  "description": "Meet Bhorania is an AI Agent Architect & Full-Stack AI Engineer specializing in Autonomous AI Agents, LLM systems, and high performance web applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

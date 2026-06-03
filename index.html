@@ -41,6 +41,9 @@
     <meta property="twitter:description" content="Building autonomous AI systems and production-grade LLM pipelines. View projects in MCP, A2A, and multi-agent AI.">
     <meta property="twitter:image" content="https://meetbhorania.com/og-image.jpg">
 
+    <!-- EmailJS Library moved to head for better reliability -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -97,6 +100,15 @@
             0% { left: -100%; }
             50% { left: 0; }
             100% { left: 100%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
         }
 
         #preloader.hidden {
@@ -412,6 +424,7 @@
 
         .hero-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 16px;
             margin-bottom: 48px;
             opacity: 0;
@@ -426,7 +439,10 @@
             border-radius: 4px;
             font-size: 15px;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
         .btn-primary:hover {
@@ -444,12 +460,39 @@
             border-radius: 4px;
             font-size: 15px;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
         .btn-secondary:hover {
             background-color: rgba(201, 168, 76, 0.1);
             transform: translateY(-2px);
+        }
+
+        .btn-upwork {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-upwork:hover {
+            background-color: rgba(20, 168, 0, 0.08);
+            border-color: #14a800;
+            color: #14C200;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(20, 168, 0, 0.15);
         }
 
         .btn-resume-hero {
@@ -1565,6 +1608,52 @@
             flex: 1;
         }
 
+        .project-btn {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: transparent;
+            border: 1.5px solid #1A1A2E;
+            color: #1A1A2E;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            margin-top: 10px;
+            z-index: 5;
+        }
+
+        .project-btn:hover {
+            background-color: #1A1A2E;
+            color: #FFFFFF;
+        }
+
+        .featured-project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent-gold);
+            color: #1A1A2E;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: all 0.25s ease;
+        }
+
+        .featured-project-btn:hover {
+            background-color: #E8C96A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(201,168,76,0.25);
+        }
+
         .carousel-arrow {
             position: absolute;
             top: 50%;
@@ -2188,15 +2277,27 @@
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   margin-right: 32px;
-  transition: color 0.25s ease;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .collab-social-links a:last-child {
   margin-right: 0;
 }
 
-.collab-social-links a:hover {
-  color: #C9A84C;
+.collab-social-links a.social-linkedin:hover {
+  color: #0077B5;
+}
+
+.collab-social-links a.social-github:hover {
+  color: #ffffff;
+}
+
+.collab-social-links a.social-medium:hover {
+  color: #ffffff;
+}
+
+.collab-social-links a.social-upwork:hover {
+  color: #14a800;
 }
 
 /* ENTRANCE ANIMATIONS */
@@ -3143,7 +3244,6 @@ body.using-keyboard * { cursor: auto !important; }
 }
     </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -3211,6 +3311,9 @@ body.using-keyboard * { cursor: auto !important; }
                 
                 <div class="hero-buttons">
                     <a href="#contact" class="btn-primary">Work With Me</a>
+                    <a href="https://www.upwork.com/freelancers/~011dcec2c9615e95d8?mp_source=share" target="_blank" rel="noopener" class="btn-upwork">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block; vertical-align:middle; position:relative; top:-1px;"><path d="M18.561 3.281a3.46 3.46 0 0 0-3.418 3.516v3.291c-1.378-2.029-2.585-4.22-3.328-5.836H8.257c-.113.882-.234 2.112-.234 3.23V10.1c0 1.258-.707 1.957-1.748 1.957-1.042 0-1.749-.7-1.749-1.957V3.284H1.057v6.816C1.057 13.9 3.1 15.753 6.275 15.753c2.476 0 4.227-1.157 4.969-2.617 1.26 1.849 2.923 3.4 5.066 4.316a4.293 4.293 0 0 1-1.15 1.547l1.09 1.7a6.223 6.223 0 0 0 2.274-3.08 3.464 3.464 0 0 0 3.414-3.413V6.797a3.456 3.456 0 0 0-3.418-3.516zm0 7.828a1.674 1.674 0 0 1-1.66-1.7V6.797a1.674 1.674 0 0 1 1.66-1.7 1.671 1.671 0 0 1 1.664 1.7v2.613a1.672 1.672 0 0 1-1.664 1.7z"/></svg> Upwork Profile
+                    </a>
                     <a href="#projects" class="btn-secondary">View My Work</a>
                 </div>
 
@@ -3528,45 +3631,51 @@ body.using-keyboard * { cursor: auto !important; }
             <div class="projects-header fade-on-scroll">
                 <span class="projects-label">MY WORK</span>
                 <h2 class="projects-heading">Projects That Speak for Themselves.</h2>
-                <p class="projects-sub">From hackathon-winning AI platforms to production healthcare systems — every project solves a real problem.</p>
+                <p class="projects-sub">From modern multi-agent systems using Google A2A to secure OAuth workflows — every system is engineered to solve a real problem.</p>
             </div>
 
             <!-- Featured Project -->
-            <div class="featured-project fade-up-project" data-project-id="gridflex">
+            <div class="featured-project fade-up-project" data-project-id="opshive">
                 <div class="fp-content">
-                    <span class="fp-badge">🏆 DEG Hackathon 2025 — Best Innovation</span>
-                    <h3 class="fp-title">GridFlex</h3>
-                    <span class="fp-tagline">Multi-Agent Platform for Datacenter Energy Optimisation</span>
+                    <span class="fp-badge">✨ Star Feature — Multi-Agent OS</span>
+                    <h3 class="fp-title">OpsHive</h3>
+                    <span class="fp-tagline">Autonomous AI Operations Centre for Founders</span>
                     <p class="fp-desc">
-                        GridFlex is an intelligent multi-agent AI platform that optimises 
-                        energy consumption across datacenters in real time. Built during the 
-                        DEG Hackathon 2025, it won Best Innovation for its approach to 
-                        sustainable infrastructure — combining autonomous agents, predictive 
-                        modelling, and live energy data to reduce waste and cut costs.
+                        OpsHive runs 6 specialised, concurrent agents — Sales, Finance, Marketing, Support, Ops, and a CEO Agent — communicating via Google's Agent-to-Agent (A2A) protocol and sharing system context via MCP. Once a founder enters their company description, agents auto-configure themselves, autonomously detect complex operational crises, collaborate in real time to build a resolution path, and surface only a single, critical decision to the founder.
                     </p>
                     <div class="fp-tags">
-                        <span class="fp-tag">Multi-Agent AI</span>
-                        <span class="fp-tag">Energy Optimisation</span>
-                        <span class="fp-tag">GCP</span>
-                        <span class="fp-tag">Python</span>
-                        <span class="fp-tag">Predictive Modelling</span>
-                        <span class="fp-tag">Real-time Data</span>
+                        <span class="fp-tag">Google A2A Protocol</span>
+                        <span class="fp-tag">MCP</span>
+                        <span class="fp-tag">Multi-Agent Architecture</span>
+                        <span class="fp-tag">Vercel</span>
                     </div>
+                    <a href="https://opshive-seven.vercel.app" target="_blank" rel="noopener" class="featured-project-btn" onclick="event.stopPropagation()">Live Demo ↗</a>
                 </div>
                 <div class="fp-visual">
-                    <div class="agent-nodes-container">
-                        <!-- Lines (CSS) -->
-                        <div class="agent-line" style="top: 20px; left: 50%; width: 2px; height: 100px; transform: rotate(30deg); transform-origin: top;"></div>
-                        <div class="agent-line" style="top: 20px; left: 50%; width: 2px; height: 100px; transform: rotate(-30deg); transform-origin: top;"></div>
-                        <div class="agent-line" style="bottom: 20px; left: 20px; width: 120px; height: 2px;"></div>
+                    <div class="agent-nodes-container" style="width: 160px; height: 140px; position: relative;">
+                        <!-- SVG Connector Lines -->
+                        <svg style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; stroke: rgba(201,168,76,0.35); stroke-width: 1.5; stroke-dasharray: 3 3;">
+                            <line x1="80" y1="70" x2="80" y2="15" />
+                            <line x1="80" y1="70" x2="140" y2="35" />
+                            <line x1="80" y1="70" x2="140" y2="105" />
+                            <line x1="80" y1="70" x2="80" y2="128" />
+                            <line x1="80" y1="70" x2="20" y2="105" />
+                            <line x1="80" y1="70" x2="20" y2="35" />
+                        </svg>
                         
-                        <!-- Nodes -->
-                        <div class="agent-node"></div>
-                        <div class="agent-node"></div>
-                        <div class="agent-node"></div>
+                        <!-- Center Node -->
+                        <div class="agent-node" style="width: 28px; height: 28px; top: 70px; left: 80px; transform: translate(-50%, -50%); border-color: #ffffff; animation-delay: 0.2s;"></div>
+                        
+                        <!-- Satellite Nodes -->
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 15px; left: 80px; transform: translate(-50%, -50%); animation-delay: 0s;"></div>
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 35px; left: 140px; transform: translate(-50%, -50%); animation-delay: 0.4s;"></div>
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 105px; left: 140px; transform: translate(-50%, -50%); animation-delay: 0.8s;"></div>
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 128px; left: 80px; transform: translate(-50%, -50%); animation-delay: 1.2s;"></div>
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 105px; left: 20px; transform: translate(-50%, -50%); animation-delay: 1.6s;"></div>
+                        <div class="agent-node" style="width: 20px; height: 20px; top: 35px; left: 20px; transform: translate(-50%, -50%); animation-delay: 2s;"></div>
                     </div>
-                    <span class="fp-visual-label">GridFlex</span>
-                    <span class="fp-visual-sub">3 Active Agents</span>
+                    <span class="fp-visual-label">OpsHive</span>
+                    <span class="fp-visual-sub">6 Active Agents via A2A</span>
                 </div>
             </div>
 
@@ -3576,6 +3685,53 @@ body.using-keyboard * { cursor: auto !important; }
                 <div class="carousel-container">
                     <div class="carousel-track" id="carouselTrack">
                         <!-- Card 1 -->
+                        <div class="carousel-card" data-project-id="school-agents">
+                            <span class="cat-badge">AI AGENTS (A2A)</span>
+                            <span class="achievement-badge">🏫 Academic Agent Intelligence</span>
+                            <h4>School Multi-Agent System</h4>
+                            <span class="pc-tagline">Intelligent Student Routing & Specialist Teachers</span>
+                            <p class="pc-desc">A multi-agent AI system where an intelligent Root Agent routes incoming student questions to 6 specialist teacher agents (English, Maths, Science, History, Geography, and Computer Science) over A2A protocol.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Google ADK</span>
+                                <span class="fp-tag">A2A Protocol</span>
+                                <span class="fp-tag">Multi-Agent</span>
+                            </div>
+                            <a href="https://lnkd.in/eXHM743H" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="carousel-card" data-project-id="mailagent-mcp">
+                            <span class="cat-badge">AI AGENTS (MCP)</span>
+                            <span class="achievement-badge">✉️ Secure Gmail Companion</span>
+                            <h4>MailAgent MCP</h4>
+                            <span class="pc-tagline">OAuth-Connected Email Assistant via MCP</span>
+                            <p class="pc-desc">An AI assistant connected directly to real Gmail accounts via OAuth. Users send, read, reply, and search messages through natural language. Features robust multi-user OAuth sessions & public Fast-API MCP nodes.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Gmail OAuth</span>
+                                <span class="fp-tag">MCP</span>
+                                <span class="fp-tag">FastAPI</span>
+                                <span class="fp-tag">Render</span>
+                            </div>
+                            <a href="https://mailagent-mcp.onrender.com" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">Live Demo ↗</a>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="carousel-card" data-project-id="nutriagent">
+                            <span class="cat-badge">AI AGENTS</span>
+                            <span class="achievement-badge">🥗 Sequential Agent Pipeline</span>
+                            <h4>NutriAgent</h4>
+                            <span class="pc-tagline">Macro & Recipe Sequential Pipeline</span>
+                            <p class="pc-desc">Type any food or dish and three specialist agents fire sequentially: returning a custom healthy recipe, structured step-by-step cooking instructions, and a full, precise calorie/macro-nutrient breakdown.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Sequential Pipeline</span>
+                                <span class="fp-tag">FastAPI</span>
+                                <span class="fp-tag">React</span>
+                                <span class="fp-tag">Vercel</span>
+                            </div>
+                            <a href="https://lnkd.in/e46pTPBy" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">Live Demo ↗</a>
+                        </div>
+
+                        <!-- Card 4 -->
                         <div class="carousel-card" data-project-id="scholarsync">
                             <span class="cat-badge">AI / NLP</span>
                             <span class="achievement-badge">🏅 Kaggle Competition Project</span>
@@ -3587,12 +3743,12 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Multi-Agent</span>
                                 <span class="fp-tag">NLP</span>
                                 <span class="fp-tag">Python</span>
-                                <span class="fp-tag">Research Automation</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 2 -->
-                        <div class="carousel-card">
+                        <!-- Card 5 -->
+                        <div class="carousel-card" data-project-id="disease-pred">
                             <span class="cat-badge">HEALTHCARE AI</span>
                             <span class="achievement-badge">🏥 Healthcare Technology</span>
                             <h4>Disease Prediction System</h4>
@@ -3603,13 +3759,12 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Fine-tuning</span>
                                 <span class="fp-tag">Flask</span>
                                 <span class="fp-tag">Python</span>
-                                <span class="fp-tag">Hugging Face</span>
-                                <span class="fp-tag">Kaggle</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 3 -->
-                        <div class="carousel-card">
+                        <!-- Card 6 -->
+                        <div class="carousel-card" data-project-id="solar-monitor">
                             <span class="cat-badge">IOT / ENERGY</span>
                             <span class="achievement-badge">⚡ Renewable Energy</span>
                             <h4>IoT Solar Panel Monitor</h4>
@@ -3620,46 +3775,92 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Python</span>
                                 <span class="fp-tag">Real-time Data</span>
                                 <span class="fp-tag">Solar Energy</span>
-                                <span class="fp-tag">Analytics</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 4 -->
-                        <div class="carousel-card">
+                        <!-- Card 7 -->
+                        <div class="carousel-card" data-project-id="romania-contest">
                             <span class="cat-badge">INTERNATIONAL COMPETITION</span>
                             <span class="achievement-badge">🌍 Top 5 — 16 Universities Worldwide</span>
                             <h4>International Computer Contest</h4>
                             <span class="pc-tagline">Stefan cel Mare University — Suceava, Romania</span>
-                            <p class="pc-desc">Represented Anglia Ruskin University at the 29th International Computer Contest at Stefan cel Mare University, Romania. Competing against 16 universities worldwide, we secured 5th place globally — working across AI, machine learning, and security systems.</p>
+                            <p class="pc-desc">Represented Anglia Ruskin University at the 29th International Computer Contest at Stefan cel Mare University, Romania. Securing 5th place globally — working across AI, machine learning, and security systems.</p>
                             <div class="fp-tags">
                                 <span class="fp-tag">AI</span>
                                 <span class="fp-tag">Machine Learning</span>
                                 <span class="fp-tag">Security</span>
                                 <span class="fp-tag">International</span>
-                                <span class="fp-tag">ARU Cambridge</span>
                             </div>
+                            <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Contest ↗</a>
                         </div>
 
-                        <!-- Card 5 -->
-                        <div class="carousel-card">
+                        <!-- Card 8 -->
+                        <div class="carousel-card" data-project-id="ttp-schools">
                             <span class="cat-badge">HACKATHON</span>
                             <span class="achievement-badge">🥇 1st Place — TTP Hackathon</span>
                             <h4>TTP Hackathon — AI in Schools</h4>
                             <span class="pc-tagline">Not Your Regular Hackathon — Cambridge & ARU</span>
-                            <p class="pc-desc">Won TTP's interdisciplinary hackathon alongside a team of Cambridge and ARU students. Our concept — using AI to improve learning outcomes in schools — impressed judges for its creativity and real-world impact, beating all competing teams.</p>
+                            <p class="pc-desc">Won TTP's interdisciplinary hackathon alongside a team of Cambridge and ARU students. Our concept — using AI to improve learning outcomes in schools — impressed judges for its creativity and real-world impact.</p>
                             <div class="fp-tags">
                                 <span class="fp-tag">AI</span>
                                 <span class="fp-tag">EdTech</span>
                                 <span class="fp-tag">Innovation</span>
                                 <span class="fp-tag">Team Leadership</span>
-                                <span class="fp-tag">Cambridge</span>
-                                <span class="fp-tag">ARU</span>
                             </div>
+                            <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Hackathon ↗</a>
                         </div>
 
                         <!-- DUPLICATE SET FOR INFINITE LOOP -->
                         <!-- Card 1 Duplicate -->
-                        <div class="carousel-card">
+                        <div class="carousel-card" data-project-id="school-agents">
+                            <span class="cat-badge">AI AGENTS (A2A)</span>
+                            <span class="achievement-badge">🏫 Academic Agent Intelligence</span>
+                            <h4>School Multi-Agent System</h4>
+                            <span class="pc-tagline">Intelligent Student Routing & Specialist Teachers</span>
+                            <p class="pc-desc">A multi-agent AI system where an intelligent Root Agent routes incoming student questions to 6 specialist teacher agents (English, Maths, Science, History, Geography, and Computer Science) over A2A protocol.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Google ADK</span>
+                                <span class="fp-tag">A2A Protocol</span>
+                                <span class="fp-tag">Multi-Agent</span>
+                            </div>
+                            <a href="https://lnkd.in/eXHM743H" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
+                        </div>
+
+                        <!-- Card 2 Duplicate -->
+                        <div class="carousel-card" data-project-id="mailagent-mcp">
+                            <span class="cat-badge">AI AGENTS (MCP)</span>
+                            <span class="achievement-badge">✉️ Secure Gmail Companion</span>
+                            <h4>MailAgent MCP</h4>
+                            <span class="pc-tagline">OAuth-Connected Email Assistant via MCP</span>
+                            <p class="pc-desc">An AI assistant connected directly to real Gmail accounts via OAuth. Users send, read, reply, and search messages through natural language. Features robust multi-user OAuth sessions & public Fast-API MCP nodes.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Gmail OAuth</span>
+                                <span class="fp-tag">MCP</span>
+                                <span class="fp-tag">FastAPI</span>
+                                <span class="fp-tag">Render</span>
+                            </div>
+                            <a href="https://mailagent-mcp.onrender.com" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">Live Demo ↗</a>
+                        </div>
+
+                        <!-- Card 3 Duplicate -->
+                        <div class="carousel-card" data-project-id="nutriagent">
+                            <span class="cat-badge">AI AGENTS</span>
+                            <span class="achievement-badge">🥗 Sequential Agent Pipeline</span>
+                            <h4>NutriAgent</h4>
+                            <span class="pc-tagline">Macro & Recipe Sequential Pipeline</span>
+                            <p class="pc-desc">Type any food or dish and three specialist agents fire sequentially: returning a custom healthy recipe, structured step-by-step cooking instructions, and a full, precise calorie/macro-nutrient breakdown.</p>
+                            <div class="fp-tags">
+                                <span class="fp-tag">Sequential Pipeline</span>
+                                <span class="fp-tag">FastAPI</span>
+                                <span class="fp-tag">React</span>
+                                <span class="fp-tag">Vercel</span>
+                            </div>
+                            <a href="https://lnkd.in/e46pTPBy" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">Live Demo ↗</a>
+                        </div>
+
+                        <!-- Card 4 Duplicate -->
+                        <div class="carousel-card" data-project-id="scholarsync">
                             <span class="cat-badge">AI / NLP</span>
                             <span class="achievement-badge">🏅 Kaggle Competition Project</span>
                             <h4>ScholarSync AI</h4>
@@ -3670,12 +3871,12 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Multi-Agent</span>
                                 <span class="fp-tag">NLP</span>
                                 <span class="fp-tag">Python</span>
-                                <span class="fp-tag">Research Automation</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 2 Duplicate -->
-                        <div class="carousel-card">
+                        <!-- Card 5 Duplicate -->
+                        <div class="carousel-card" data-project-id="disease-pred">
                             <span class="cat-badge">HEALTHCARE AI</span>
                             <span class="achievement-badge">🏥 Healthcare Technology</span>
                             <h4>Disease Prediction System</h4>
@@ -3686,13 +3887,12 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Fine-tuning</span>
                                 <span class="fp-tag">Flask</span>
                                 <span class="fp-tag">Python</span>
-                                <span class="fp-tag">Hugging Face</span>
-                                <span class="fp-tag">Kaggle</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 3 Duplicate -->
-                        <div class="carousel-card">
+                        <!-- Card 6 Duplicate -->
+                        <div class="carousel-card" data-project-id="solar-monitor">
                             <span class="cat-badge">IOT / ENERGY</span>
                             <span class="achievement-badge">⚡ Renewable Energy</span>
                             <h4>IoT Solar Panel Monitor</h4>
@@ -3703,41 +3903,40 @@ body.using-keyboard * { cursor: auto !important; }
                                 <span class="fp-tag">Python</span>
                                 <span class="fp-tag">Real-time Data</span>
                                 <span class="fp-tag">Solar Energy</span>
-                                <span class="fp-tag">Analytics</span>
                             </div>
+                            <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Project ↗</a>
                         </div>
 
-                        <!-- Card 4 Duplicate -->
-                        <div class="carousel-card">
+                        <!-- Card 7 Duplicate -->
+                        <div class="carousel-card" data-project-id="romania-contest">
                             <span class="cat-badge">INTERNATIONAL COMPETITION</span>
                             <span class="achievement-badge">🌍 Top 5 — 16 Universities Worldwide</span>
                             <h4>International Computer Contest</h4>
                             <span class="pc-tagline">Stefan cel Mare University — Suceava, Romania</span>
-                            <p class="pc-desc">Represented Anglia Ruskin University at the 29th International Computer Contest at Stefan cel Mare University, Romania. Competing against 16 universities worldwide, we secured 5th place globally — working across AI, machine learning, and security systems.</p>
+                            <p class="pc-desc">Represented Anglia Ruskin University at the 29th International Computer Contest at Stefan cel Mare University, Romania. Securing 5th place globally — working across AI, machine learning, and security systems.</p>
                             <div class="fp-tags">
                                 <span class="fp-tag">AI</span>
                                 <span class="fp-tag">Machine Learning</span>
                                 <span class="fp-tag">Security</span>
                                 <span class="fp-tag">International</span>
-                                <span class="fp-tag">ARU Cambridge</span>
                             </div>
+                            <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Contest ↗</a>
                         </div>
 
-                        <!-- Card 5 Duplicate -->
-                        <div class="carousel-card">
+                        <!-- Card 8 Duplicate -->
+                        <div class="carousel-card" data-project-id="ttp-schools">
                             <span class="cat-badge">HACKATHON</span>
                             <span class="achievement-badge">🥇 1st Place — TTP Hackathon</span>
                             <h4>TTP Hackathon — AI in Schools</h4>
                             <span class="pc-tagline">Not Your Regular Hackathon — Cambridge & ARU</span>
-                            <p class="pc-desc">Won TTP's interdisciplinary hackathon alongside a team of Cambridge and ARU students. Our concept — using AI to improve learning outcomes in schools — impressed judges for its creativity and real-world impact, beating all competing teams.</p>
+                            <p class="pc-desc">Won TTP's interdisciplinary hackathon alongside a team of Cambridge and ARU students. Our concept — using AI to improve learning outcomes in schools — impressed judges for its creativity and real-world impact.</p>
                             <div class="fp-tags">
                                 <span class="fp-tag">AI</span>
                                 <span class="fp-tag">EdTech</span>
                                 <span class="fp-tag">Innovation</span>
                                 <span class="fp-tag">Team Leadership</span>
-                                <span class="fp-tag">Cambridge</span>
-                                <span class="fp-tag">ARU</span>
                             </div>
+                            <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener" class="project-btn" onclick="event.stopPropagation()">View Hackathon ↗</a>
                         </div>
                     </div>
                 </div>
@@ -4427,44 +4626,125 @@ recogNums.forEach(el => recogObs.observe(el));
 })();
 
 (function() {
-  emailjs.init("YYTvBZAFOyGZzij1s");
-  const form = document.getElementById('contactForm');
-  const btn = document.getElementById('contactSubmitBtn');
-  const msg = document.getElementById('successMsg');
-  if (form) {
-    form.addEventListener('submit', (e) => {
+  const publicKey = "YYTvBZAFOyGZzij1s";
+  const serviceId = "service_zdups7u";
+  const templateId = "template_kggfkrw";
+
+  const setupContactForm = () => {
+    const form = document.getElementById('contactForm');
+    const btn = document.getElementById('contactSubmitBtn');
+    const msg = document.getElementById('successMsg');
+    const card = form.closest('.contact-form-card');
+    const header = card ? card.querySelector('.form-header') : null;
+    const thankYou = document.getElementById('thankYouCard');
+
+    if (!form) {
+      console.warn("Contact form not found in DOM");
+      return;
+    }
+
+    // Initialize EmailJS
+    const init = () => {
+      if (window.emailjs) {
+        window.emailjs.init(publicKey);
+        console.log("EmailJS initialized with key:", publicKey);
+      } else {
+        console.warn("EmailJS library not yet available");
+      }
+    };
+    init();
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      btn.textContent = "Sending..."; btn.disabled = true;
-      const params = { 
-        name: form.user_name.value, 
-        phone: form.user_phone.value,
-        email: form.user_email.value, 
+      
+      if (!window.emailjs) {
+        alert("Email service is still loading, please wait...");
+        return;
+      }
+
+      console.log("%c Form Submission Triggered ", "background: #222; color: #bada55");
+      
+      // Feedback to user
+      const originalBtnHtml = btn.innerHTML;
+      btn.innerHTML = `
+        <svg class="animate-spin" style="width: 18px; height: 18px; margin-right: 8px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.75"></path></svg>
+        Processing...
+      `;
+      btn.disabled = true;
+
+      const params = {
+        name: form.user_name.value,
+        phone: form.user_phone.value || "N/A",
+        email: form.user_email.value,
         subject: form.subject.value,
-        message: form.message.value, 
-        time: new Date().toLocaleString() 
+        message: form.message.value,
+        time: new Date().toLocaleString()
       };
-      emailjs.send("service_zdups7u", "template_kggfkrw", params).then(() => {
-        if (msg) msg.style.display = "block"; 
-        form.reset(); 
-        btn.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-          Enquiry Sent!
-        `;
-        setTimeout(() => {
-          if (msg) msg.style.display = "none";
+
+      console.log("Sending with params:", params);
+
+      window.emailjs.send(serviceId, templateId, params)
+        .then((res) => {
+          console.log("SUCCESS!", res.status, res.text);
+          
+          if (thankYou) {
+            form.style.display = "none";
+            if (header && header.classList.contains('form-header')) header.style.display = "none";
+            thankYou.style.display = "block";
+          } else if (msg) {
+            msg.style.display = "block";
+            msg.style.background = "rgba(0, 255, 127, 0.15)";
+            msg.style.border = "1px solid #00ff7f";
+            msg.style.color = "#00ff7f";
+            msg.innerHTML = "✓ <strong>Message Sent!</strong> Thanks Meet will get back to you soon.";
+          }
+          
+          form.reset();
           btn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            Send Enquiry
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Success!
+          `;
+
+          setTimeout(() => {
+            if (thankYou) {
+              thankYou.style.display = "none";
+              if (header && header.classList.contains('form-header')) header.style.display = "block";
+              form.style.display = "block";
+              // Animation for form return
+              form.style.animation = "fadeIn 0.5s ease-out";
+            }
+            if (msg) msg.style.display = "none";
+            btn.innerHTML = originalBtnHtml;
+            btn.disabled = false;
+          }, 8000);
+        })
+        .catch((err) => {
+          console.error("FAILED...", err);
+          
+          if (msg) {
+            msg.style.display = "block";
+            msg.style.background = "rgba(255, 71, 87, 0.15)";
+            msg.style.border = "1px solid #ff4757";
+            msg.style.color = "#ff4757";
+            msg.innerHTML = "✘ <strong>Error:</strong> " + (err.text || "Submission failed") + ". <br><small>Please check your connection or contact meet.bhorania@gmail.com.</small>";
+          }
+          
+          btn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            Try Again
           `;
           btn.disabled = false;
-        }, 5000);
-      }, (err) => { 
-        console.error(err); 
-        btn.textContent = "Failed — Try Again"; 
-        btn.disabled = false; 
-      });
+        });
     });
+  };
+
+  // Run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupContactForm);
+  } else {
+    setupContactForm();
   }
+})();
 
   // Preloader Logic
   window.addEventListener('load', () => {
@@ -4508,73 +4788,26 @@ recogNums.forEach(el => recogObs.observe(el));
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
     try {
-      const [{ GoogleGenAI }, { marked }] = await Promise.all([
-        import('https://esm.run/@google/genai'),
-        import('https://esm.run/marked')
-      ]);
+      const { marked } = await import('https://esm.run/marked');
       
-      // Vite will replace process.env.GEMINI_API_KEY with the actual key string
-      const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey || apiKey === 'undefined') throw new Error('Gemini API Key is missing. Please set it in the Settings menu.');
-      
-      const ai = new GoogleGenAI({ apiKey });
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: text,
-        config: {
-          systemInstruction: `You are the official AI assistant for Meet Bhorania's portfolio website. 
-
-CRITICAL RULE: You MUST ONLY answer questions using the information provided below. If a user asks something not covered here, politely state that you are only trained to answer questions about Meet's work, skills, and portfolio.
-
-### CONTEXT ABOUT MEET BHORANIA:
-
-**Overview:**
-- Role: AI Engineer, Hackathon Winner, Speaker.
-- Location: London, UK.
-- Experience: 3+ years, 10+ projects delivered, 2 major hackathon awards.
-- Education: First Class Honours in Computer Science from Anglia Ruskin University (ARU).
-
-**Core Expertise & Services:**
-1. AI Engineering & LLM Systems: Production-grade RAG pipelines, multi-agent systems, and LLM integrations (GCP/AWS).
-2. Premium Web Development: Full-stack React/Next.js apps, fast, responsive, and SEO-optimized.
-3. Freelance & Collaboration: Available for solo projects or team-based collaborations.
-
-**Technical Skills:**
-- Languages: Python (Expert), TypeScript, JavaScript.
-- AI/ML: PyTorch, TensorFlow, LangChain, LlamaIndex, OpenAI/Gemini APIs, Vector DBs, Prompt Engineering.
-- Cloud/DevOps: GCP, AWS, Docker, CI/CD, Git, Linux, Vercel.
-- Web: React, Next.js, Tailwind CSS, REST APIs.
-
-**Key Projects:**
-- **GridFlex:** Multi-agent platform for datacenter energy optimization. Won "Best Innovation" at DEG Hackathon 2025.
-- **ScholarSync AI:** Automated literature review tool using Gemini 2.0 Flash to synthesize academic papers.
-- **Disease Prediction System:** Fine-tuned Gemma 2 model for symptom-based medical diagnosis.
-- **IoT Solar Panel Monitor:** Real-time energy tracking and analytics system.
-- **International Computer Contest:** Represented ARU in Romania, securing 5th place globally.
-- **TTP Hackathon:** 1st place winner for an AI in Schools concept.
-
-**Achievements & Speaking:**
-- Google DeepMind AI Research Foundations program graduate.
-- Speaker at BSides Security London and GDG London I/O Extended.
-- DEG Hackathon 2025 Winner.
-
-**Contact Information:**
-- Email: meet.bhorania@gmail.com
-- Phone: +44 7776 605358
-- LinkedIn: linkedin.com/in/meet-bhorania
-
-**Response Style:**
-- Be professional, punchy, and highly structured.
-- Use headers, bullet points, and **bolding** for key terms.
-- Use emojis (🤖, 🚀, 💡) to keep it engaging.
-- If a question is outside this scope, say: "I'm sorry, I can only provide information related to Meet Bhorania's portfolio, projects, and professional background. Feel free to ask about his AI work or web development services!"`
-        }
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: text })
       });
       
-      botMsg.innerHTML = marked.parse(response.text);
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || 'Server error');
+      }
+      
+      const data = await response.json();
+      botMsg.innerHTML = marked.parse(data.text || '');
     } catch (error) {
       console.error('AI Error:', error);
-      botMsg.textContent = "I'm having a bit of trouble connecting to my brain right now. Please try again in a moment!";
+      botMsg.textContent = "I'm having a bit of trouble connecting to Meet's brain right now. " + (error.message || "Please try again under a minute!");
     }
     chatContainer.scrollTop = chatContainer.scrollHeight;
   };
@@ -4625,23 +4858,86 @@ CRITICAL RULE: You MUST ONLY answer questions using the information provided bel
 
   // Project Modal Logic
   const projectData = {
+    'opshive': {
+      title: 'OpsHive',
+      tag: 'AI AGENTS',
+      desc: 'An autonomous operations platform that coordinates 6 specialist AI agents running simultaneously using Google A2A protocol. From crisis detection to contextual team problem solving, OpsHive enables founders to run complex businesses automatically.',
+      tech: ['Google A2A Protocol', 'MCP', 'Multi-Agent', 'Vercel'],
+      img: 'https://picsum.photos/seed/hive/800/600',
+      live: 'https://opshive-seven.vercel.app',
+      repo: 'https://github.com/meetbhorania'
+    },
+    'school-agents': {
+      title: 'School Multi-Agent System',
+      tag: 'AI AGENTS (A2A)',
+      desc: 'An advanced educational multi-agent routing network built using Google ADK and Agent-to-Agent communication protocols. Student queries are interpreted by a central orchestrator which intelligently delegates academic subtasks and questions to specific specialist teaching bots.',
+      tech: ['Google ADK', 'A2A Protocol', 'Multi-Agent Architecture'],
+      img: 'https://picsum.photos/seed/school/800/600',
+      live: 'https://lnkd.in/eXHM743H',
+      repo: 'https://github.com/meetbhorania'
+    },
+    'mailagent-mcp': {
+      title: 'MailAgent MCP',
+      tag: 'AI AGENTS (MCP)',
+      desc: 'A secure OAuth-connected virtual assistant executing read, write, reply, and search workflows natively against real Gmail accounts. Built on top of the Model Context Protocol (MCP) using FastAPI, providing a modular framework for public and private multi-user agents.',
+      tech: ['Gmail OAuth', 'MCP', 'FastAPI', 'Render'],
+      img: 'https://picsum.photos/seed/mail/800/600',
+      live: 'https://mailagent-mcp.onrender.com',
+      repo: 'https://github.com/meetbhorania'
+    },
+    'nutriagent': {
+      title: 'NutriAgent',
+      tag: 'AI AGENTS',
+      desc: 'NutriAgent relies on a custom sequential agent pipeline to process user dietary inputs. By triggering three tailored agents consecutively, users receive highly accurate, healthy recipes, logical step-by-step cooking directions, and full macro breakdowns for their culinary requests.',
+      tech: ['Sequential Pipeline', 'FastAPI', 'React', 'Vercel'],
+      img: 'https://picsum.photos/seed/salad/800/600',
+      live: 'https://lnkd.in/e46pTPBy',
+      repo: 'https://github.com/meetbhorania'
+    },
     'scholarsync': {
       title: 'ScholarSync AI',
       tag: 'AI / NLP',
       desc: 'An intelligent multi-agent literature review tool built with Google Gemini 2.0 Flash. ScholarSync automates finding, summarising, and synthesising academic papers — cutting research time from days to minutes.',
       tech: ['Gemini 2.0', 'LangGraph', 'Python', 'React'],
       img: 'https://picsum.photos/seed/ai/800/600',
-      live: '#',
-      repo: '#'
+      live: 'https://github.com/meetbhorania',
+      repo: 'https://github.com/meetbhorania'
     },
-    'gridflex': {
-      title: 'GridFlex',
-      tag: 'AI / Energy',
-      desc: 'A multi-agent system designed for real-time energy grid optimization. GridFlex uses predictive modeling to balance load and reduce waste across distributed energy resources.',
-      tech: ['Python', 'TensorFlow', 'GCP', 'FastAPI'],
-      img: 'https://picsum.photos/seed/energy/800/600',
-      live: '#',
-      repo: '#'
+    'disease-pred': {
+      title: 'Disease Prediction System',
+      tag: 'HEALTHCARE AI',
+      desc: 'Predicts human ailments and provides lifestyle/medical counseling based on natural language symptom representations after fine-tuning Google’s Gemma 2. Engineered using medical corpus datasets and served via a Flask web application.',
+      tech: ['Gemma 2', 'Fine-tuning', 'Flask', 'Python'],
+      img: 'https://picsum.photos/seed/health/800/600',
+      live: 'https://github.com/meetbhorania',
+      repo: 'https://github.com/meetbhorania'
+    },
+    'solar-monitor': {
+      title: 'IoT Solar Panel Monitor',
+      tag: 'IOT / ENERGY',
+      desc: 'Designed and deployed real-time tracking dashboards for industrial solar arrays. Built during a tenure at Niketan Power Service, displaying critical real-time diagnostics, smart failure alerts, and historical performance charts.',
+      tech: ['IoT Analytics', 'Python', 'Real-time Data', 'Energy'],
+      img: 'https://picsum.photos/seed/solar/800/600',
+      live: 'https://github.com/meetbhorania',
+      repo: 'https://github.com/meetbhorania'
+    },
+    'romania-contest': {
+      title: 'International Computer Contest',
+      tag: 'GLOBAL COMPETITION',
+      desc: 'Proudly represented Anglia Ruskin University Cambridge at the 29th annual competition held at Stefan cel Mare University, Suceava, Romania. Competing under extreme timeline constraints against 16 top universities worldwide, we placed 5th globally.',
+      tech: ['AI Development', 'Machine Learning', 'Cybersecurity'],
+      img: 'https://picsum.photos/seed/contest/800/600',
+      live: 'https://www.linkedin.com/in/meetbhorania/',
+      repo: 'https://www.linkedin.com/in/meetbhorania/'
+    },
+    'ttp-schools': {
+      title: 'TTP Hackathon — AI in Schools',
+      tag: 'HACKATHON',
+      desc: 'Won first prize at the prestigious interdisciplinary TTP Hackathon in Cambridge. Aimed at refining modern primary-school education using contextual LLM aids, the prototype balanced play, instruction, and student assessment beautifully.',
+      tech: ['Team Leadership', 'EdTech Systems', 'Rapid Prototyping'],
+      img: 'https://picsum.photos/seed/classroom/800/600',
+      live: 'https://www.linkedin.com/in/meetbhorania/',
+      repo: 'https://www.linkedin.com/in/meetbhorania/'
     }
   };
 
@@ -4722,7 +5018,6 @@ CRITICAL RULE: You MUST ONLY answer questions using the information provided bel
 
   document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; out.style.opacity = '0'; });
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; out.style.opacity = '1'; });
-})();
 
     </script>
     <!-- COLLABORATION SECTION -->
@@ -4767,9 +5062,10 @@ CRITICAL RULE: You MUST ONLY answer questions using the information provided bel
     <div class="collab-social reveal">
       <span class="collab-social-text">Find me on</span>
       <div class="collab-social-links">
-        <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="https://github.com/meetbhorania" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://medium.com/@meet.bhorania" target="_blank" rel="noopener">Medium ↗</a>
+        <a href="https://www.linkedin.com/in/meetbhorania/" target="_blank" rel="noopener" class="social-linkedin">LinkedIn ↗</a>
+        <a href="https://github.com/meetbhorania" target="_blank" rel="noopener" class="social-github">GitHub ↗</a>
+        <a href="https://medium.com/@meet.bhorania" target="_blank" rel="noopener" class="social-medium">Medium ↗</a>
+        <a href="https://www.upwork.com/freelancers/~011dcec2c9615e95d8?mp_source=share" target="_blank" rel="noopener" class="social-upwork">Upwork ↗</a>
       </div>
     </div>
   </div>
@@ -4841,6 +5137,20 @@ CRITICAL RULE: You MUST ONLY answer questions using the information provided bel
           <p>Fill the form and I will get back to you as soon as possible.</p>
           <div id="successMsg" style="display: none; background: rgba(0, 255, 127, 0.1); border: 1px solid rgba(0, 255, 127, 0.3); color: #00ff7f; padding: 12px; border-radius: 8px; margin-top: 16px; font-size: 14px; text-align: center;">
             ✓ Thank you! Your message has been sent successfully.
+          </div>
+        </div>
+
+        <div id="thankYouCard" style="display: none; text-align: center; padding: 60px 20px; background: rgba(10, 15, 30, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(8px); animation: fadeIn 0.5s ease-out;">
+          <div style="width: 70px; height: 70px; background: rgba(0, 255, 127, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#00ff7f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; margin-bottom: 12px; letter-spacing: -0.5px;">Message Received!</h3>
+          <p style="color: rgba(255,255,255,0.7); font-size: 17px; line-height: 1.6; max-width: 340px; margin: 0 auto 24px;">
+            Thank you for reaching out. Meet will review your enquiry and get back to you within <strong>24 hours</strong>.
+          </p>
+          <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.05);">
+            <svg class="animate-spin" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.2"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.6"></path></svg>
+            Auto-resetting in 8s
           </div>
         </div>
 
